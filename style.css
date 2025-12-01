@@ -1,0 +1,728 @@
+/* FUENTES */
+@font-face {
+  font-family: "Aipointe";
+  src: url("AIPOINTE.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: "CascadiaMono";
+  src: url("CascadiaMono-Regular.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "CascadiaMono";
+  src: url("CascadiaMono-SemiBold.otf") format("opentype");
+  font-weight: 600;
+}
+
+:root {
+  --bg: #f2e4d7;
+  --bg-card: #f9f4ee;
+  --accent: #c7976b;
+  --text-main: #3c2d28;
+  --text-soft: #7a6459;
+  --border-soft: #ddcabb;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: "CascadiaMono", monospace;
+  font-size: 20px;
+  position: relative;
+  isolation: isolate;
+}
+
+/* === GLOBAL PAPER TEXTURE OVERLAY === */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: url("textura-de-papel-blanco.jpeg") center/cover no-repeat;
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+  z-index: 9999;
+}
+body::after {
+  z-index: 2147483647 !important;
+}
+
+/* Ensure the texture overlay can stack above all transformed elements */
+html {
+  position: relative;
+  isolation: isolate;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+/* ---------- HERO (pasaporte cerrado) ---------- */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+.hero-inner {
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+
+.logo-img {
+  width: 700px;
+  max-width: 90%;
+  margin: 0 auto 0px;
+  display: block;
+}
+
+.hero-names {
+  font-size: 2.4rem;
+  margin: 0;
+}
+
+.hero-tag {
+  margin-top: 8px;
+  font-size: 1.1rem;
+}
+
+.hero-passport-btn {
+  margin-top: -30px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hero-passport-img {
+  width: 130%;
+  max-width: 400px;
+}
+
+/* === ESTADO DE DESVANECIMIENTO AL ABRIR === */
+.hero-passport-img.fade-out {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0.93) !important;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none !important;
+}
+
+.hero-hint {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* ocultar hero cuando se abre invitación */
+.page.show-layout .hero {
+  display: none;
+}
+
+/* Hide closed passport image after opening */
+.page.show-layout .hero-passport-img {
+  display: none !important;
+}
+
+/* ---------- LAYOUT PRINCIPAL (inspirado en plantilla Floral) ---------- */
+
+.layout {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+  display: none;
+}
+
+.page.show-layout .layout {
+  display: block;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section,
+.section *:not(.digit):not(.digit *){
+  text-align: center;
+}
+
+/* ---------- HERO OPEN ---------- */
+
+.hero-open .names {
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+.hero-open .tag {
+  margin: 8px 0 18px;
+  font-size: 1.1rem;
+}
+
+.collage-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px; /* ya lo tienes */
+  margin: 0 auto 40px; 
+  height: 520px; /* <<< NUEVO: asegura el espacio del pasaporte */
+}
+
+.collage-img {
+  display: block;
+  width: 100%;
+}
+
+/* overlay 110% */
+.collage-open {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(20px);
+  width: 200%;
+  max-width: 850px;
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Add jump animation on open */
+.page.show-layout .collage-open {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) translateY(0) !important;
+  animation: passportJump 0.7s ease forwards;
+}
+
+@keyframes passportJump {
+  0% { transform: translate(-50%, -50%) scale(0.95); }
+  60% { transform: translate(-50%, -54%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.intro {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-main);
+}
+
+/* New subtitle style */
+.subtitle-open {
+  font-size: 1rem;
+  color: var(--text-soft);
+  margin-top: -6px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* ---------- FECHA + COUNTDOWN ---------- */
+
+.esperamos {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.date-pill {
+  margin: 10px auto 0;
+  display: inline-block;
+  padding: 28px 80px;
+  border-radius: 80px;
+  background: #ffffff;
+  border: 2px solid var(--border-soft);
+  font-size: 2.8rem;
+  font-family: "CascadiaMono", monospace;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+
+/* barra countdown tipo info strip */
+
+.countdown-bar {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: #d2a985;
+  padding: 35px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.cd-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  gap: 12px;
+}
+
+.countdown {
+  display: flex;
+  gap: 90px;
+  align-items: center;
+  justify-content: center;
+}
+
+.digits-container {
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px;
+}
+
+.digit {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 90px;
+  height: 110px;
+  background: #2c2c2c;
+  border-radius: 10px;
+  margin: 0 8px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Etiquetas arriba de los números */
+.cd-block label {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: left !important;
+  width: 100%;
+  margin-left: 6px;
+  display: block;
+  order: -1;
+  margin-bottom: 8px;
+}
+
+/* polaroids bajo el contador */
+
+.polaroids-wrapper {
+  margin-top: 40px;
+}
+
+.polaroids-img {
+  width: 100%;
+  max-width: 520px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ---------- ITINERARIO (tipo secciones info plantilla) ---------- */
+
+.itinerary-title {
+  margin: 0 0 16px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.itinerary-wrapper {
+  position: relative;
+  padding-top: 22px;
+}
+
+/* línea punteada de avión de fondo */
+.itinerary-path {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 90%;
+  max-width: 600px;
+  bottom: -40px;
+  transform: translateX(-50%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* it-item */
+.it-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 90px;
+}
+
+.it-item * {
+  text-align: center;
+}
+
+.it-icon img {
+  width: 260px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.it-time {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Ícono centrado, círculo ~260px => radio ~130px.
+   Sumamos un gap extra de 60px para separar el texto. */
+.it-left {
+  left: 500px;
+}
+
+.it-right {
+  right: 500px;
+}
+
+/* título y dirección */
+.it-title {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 6px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.it-address {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+/* espacio final */
+.bottom-space {
+  height: 100px;
+  background: transparent;
+}
+
+/* ---------- DESKTOP: centrado tipo “tarjeta móvil” ---------- */
+
+@media (min-width: 900px) {
+  .hero-inner,
+  .layout {
+    max-width: 800px;
+  }
+
+  .collage-wrapper {
+    max-width: 340px;
+  }
+}
+
+/* Repetimos para asegurarnos del tamaño de íconos en todas las vistas */
+.it-icon img {
+  width: 260px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+/* --- FIX: permitir que los números se muestren --- */
+
+/* neutraliza la regla global body * dentro del contador */
+.countdown * {
+  text-align: initial !important;
+}
+
+/* fuerza a .digit a tener tamaño real */
+.digit {
+  width: 90px !important;
+  height: 110px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #2c2c2c !important;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* fuerza a los números a aparecer */
+.digit span {
+  font-family: "Aipointe", serif !important;
+  color: #ffffff !important;
+  font-size: 5rem !important;
+  line-height: 1 !important;
+  display: block !important;
+}
+
+/* Scroll bloqueado por defecto */
+body {
+  overflow: hidden !important;
+  height: 100vh;
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
+}
+
+/* Scroll habilitado después de abrir invitación */
+body.show-layout,
+.page.show-layout {
+  overflow-y: auto !important;
+  height: auto !important;
+}
+
+/* === FADE INICIAL DEL PASAPORTE CERRADO === */
+.hero-passport-img {
+  opacity: 0;
+  transform: scale(0.98);
+  animation: passportFadeIn 1s ease forwards;
+}
+
+@keyframes passportFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* === PASAPORTE ABIERTO FADE-IN === */
+.page.show-layout .collage-open {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) translateY(0) !important;
+  animation: passportJump 0.7s ease forwards;
+}
+
+
+/* ===== FADE-OUT DEL HERO (LANDING) ===== */
+.hero {
+  transition: opacity 0.8s ease;
+}
+
+.page.fade-out-hero .hero {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== FADE-IN DEL LAYOUT COMPLETO ===== */
+.layout {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.page.show-layout .layout {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* === APPLE-LIKE DEPTH FADE FOR HERO === */
+.page.fade-out-hero .hero {
+  opacity: 0;
+  transform: scale(0.96);
+  filter: blur(8px);
+  transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+              filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* === APPLE-LIKE LIFT-IN FOR LAYOUT === */
+.page.show-layout .layout {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  filter: blur(0);
+  transition: opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+              filter 0.8s ease-out;
+}
+
+/* initial state for cinematic entrance */
+.layout {
+  opacity: 0;
+  transform: translateY(20px) scale(0.985);
+  filter: blur(6px);
+}
+
+/* === CINEMATIC PASSPORT OPEN === */
+.collage-open {
+  transition: opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+              filter 0.8s ease-out;
+  filter: blur(8px);
+}
+
+.page.show-layout .collage-open {
+  opacity: 1 !important;
+  filter: blur(0);
+}
+
+/* === Soft cinematic staging for smoother scene entrance === */
+
+/* Mantener layout oculto un instante antes del fade-in real */
+.page:not(.show-layout) .layout {
+  opacity: 0 !important;
+  transform: translateY(20px) scale(0.985);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Cuando aparece, suavizar aún más la curva */
+.page.show-layout .layout {
+  transition: opacity 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.9s ease-out;
+}
+/* === Hover suave del pasaporte cerrado en el landing === */
+.hero-passport-img {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.hero-passport-img:hover {
+  transform: scale(1.04);
+}
+
+/* === FIX HOVER: asegurar que la animación inicial no bloquee el hover === */
+.hero-passport-btn:hover .hero-passport-img:not(.fade-out) {
+  transform: scale(1.04) !important;
+}
+
+/* Force all root elements to allow the overlay to sit on top */
+html, body, .page {
+  position: relative;
+  isolation: isolate;
+}
+
+/* TEXTURA POR ENCIMA DE TODA LA PÁGINA */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("textura-de-papel-blanco.jpg") center/cover no-repeat;
+  background-size: cover;
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 99999999 !important;
+}
+
+/* === ESCALA GLOBAL PARA MOBILE (proporcional y uniforme) === */
+@media (max-width: 760px) {
+
+  .page-scale {
+    transform: scale(0.88);
+    transform-origin: top center;
+    width: 100%;
+  }
+
+  .it-left,
+  .it-right {
+    position: static;
+    transform: none;
+    margin-top: 10px;
+  }
+
+  .it-time {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  body {
+    overflow-x: hidden !important;
+  }
+
+  /* Ajusta el espacio final para compensar el scale */
+  .bottom-space {
+    height: 200px;
+  }
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+/* === FIX CONTADOR EN MOBILE === */
+@media (max-width: 760px) {
+
+  /* Reducimos el espacio entre bloques del contador */
+  .countdown {
+    gap: 30px !important;
+  }
+  .countdown {
+    width: 100% !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+}
+.cd-block {
+    flex: 1 1 0 !important;
+    align-items: center !important;
+}
+
+  /* Reducimos tamaño de cada tarjetita */
+  .digit {
+    width: 60px !important;
+    height: 80px !important;
+  }
+
+  .digit {
+    flex-shrink: 1 !important;
+}
+
+  /* Reducimos tamaño de los números */
+  .digit span {
+    font-size: 3.2rem !important;
+  }
+
+  /* Reducimos espacio entre los dos dígitos de cada grupo */
+  .digits-container {
+    gap: 6px !important;
+  }
+
+  /* Ajustamos las etiquetas (MESES / DÍAS / HORAS) */
+  .cd-block label {
+    font-size: 1rem !important;
+    margin-left: 2px !important;
+  }
+
+  /* Ajuste para que el strip no se desborde */
+  .countdown-bar {
+    padding: 25px 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+/* === FIX DEFINITIVO: que la barra del contador llegue al borde real === */
+
+@media (max-width: 760px) {
+
+  .countdown-bar {
+    width: 100%;
+    margin: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box;
+  }
+  .countdown-bar {
+    overflow: hidden !important;
+}
+
+  /* Asegurar que nada interno genere overflow */
+  .countdown {
+    width: 100%;
+    justify-content: space-around !important;
+  }
+
+  body, html {
+    overflow-x: hidden !important;
+  }
+}

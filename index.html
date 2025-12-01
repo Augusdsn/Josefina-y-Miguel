@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Josefina y Miguel</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" href="textura-de-papel-blanco.jpg" as="image">
+</head>
+<body>
+
+  <div class="page">
+    <div class="page-scale">
+
+    <!-- HERO: pantalla de entrada con pasaporte cerrado -->
+    <section class="hero" id="heroClosed">
+      <div class="hero-inner">
+        <img src="Logo-03.svg" class="logo-img" />
+
+        <button class="hero-passport-btn" id="openInvite">
+          <img src="pasaporte-cerrado.png" alt="Pasaporte cerrado" class="hero-passport-img" />
+        </button>
+
+        <p class="hero-hint">Toca el pasaporte para abrir la invitación</p>
+      </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL, tipo “landing” (como el template Floral) -->
+    <main class="layout" id="layout">
+
+      <!-- BLOQUE HERO PRINCIPAL (pasaporte abierto + texto intro) -->
+      <section class="section hero-open">
+        <div class="card">
+          <img src="Logo-03.svg" class="logo-img" />
+
+          <p class="subtitle-open">¡Nos casamos!</p>
+
+          <div class="collage-wrapper">
+            <img src="pasaporte-abierto.png" alt="Pasaporte abierto" class="collage-img collage-open" />
+          </div>
+
+          <p class="intro">
+            Elegimos caminar juntos en esta vida, y nos encantaría que fueras parte de este viaje...
+          </p>
+        </div>
+      </section>
+
+      <section class="section date-section">
+    <div class="card">
+
+      <p class="esperamos">Te esperamos el</p>
+      <div class="date-pill">20/03/2026</div>
+      <div class="countdown-bar">
+<div class="countdown">
+
+  <div class="cd-block">
+    <label>MESES</label>
+    <div class="digits-container" id="months-container">
+      <div class="digit"><span>0</span></div>
+      <div class="digit"><span>0</span></div>
+    </div>
+  </div>
+
+  <div class="cd-block">
+    <label>DÍAS</label>
+    <div class="digits-container" id="days-container">
+      <div class="digit"><span>0</span></div>
+      <div class="digit"><span>0</span></div>
+    </div>
+  </div>
+
+  <div class="cd-block">
+    <label>HORAS</label>
+    <div class="digits-container" id="hours-container">
+      <div class="digit"><span>0</span></div>
+      <div class="digit"><span>0</span></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+      <div class="polaroids-wrapper">
+        <img src="polaroids.png" alt="Polaroids" class="polaroids-img" />
+      </div>
+
+    </div>
+  </section>
+
+      <!-- BLOQUE ITINERARIO -->
+      <section class="section itinerary-section">
+        <div class="card">
+
+          <h2 class="itinerary-title">Itinerario:</h2>
+
+          <div class="itinerary-wrapper">
+
+            <img src="recorrido-avion-largo.png" alt="Recorrido avión" class="itinerary-path" />
+
+            <div class="itinerary-items">
+
+              <div class="it-item">
+                <h3 class="it-title">Sí, acepto</h3>
+                <div class="it-icon">
+                  <img src="si-acepto.png" alt="Sí, acepto" />
+                </div>
+                <p class="it-address">Iglesia Colegio Verbo Divino</p>
+                <p class="it-address">Av. Chicureo 12.500, Colina</p>
+                <p class="it-time it-left">17:30hrs</p>
+              </div>
+
+              <div class="it-item">
+                <h3 class="it-title">Cóctel</h3>
+                <div class="it-icon">
+                  <img src="coctail.png" alt="Cóctel" />
+                </div>
+                <p class="it-address">Casona de la Laguna Sofía Jottar</p>
+                <p class="it-address">Av. Chicureo 13.000, Piedra Roja, Chicureo, Colina</p>
+                <p class="it-time it-right">19:30hrs</p>
+              </div>
+
+              <div class="it-item">
+                <h3 class="it-title">Comida</h3>
+                <div class="it-icon">
+                  <img src="comida.png" alt="Comida" />
+                </div>
+                <p class="it-address">Casona de la Laguna Sofía Jottar</p>
+                <p class="it-time it-left">21:00hrs</p>
+              </div>
+
+              <div class="it-item">
+                <h3 class="it-title">Fiesta</h3>
+                <div class="it-icon">
+                  <img src="fiesta.png" alt="Fiesta" />
+                </div>
+                <p class="it-address">Casona de la Laguna Sofía Jottar</p>
+                <p class="it-time it-right">23:00hrs</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section bottom-space"></section>
+
+    </main>
+
+  </div> <!-- cierre page-scale -->
+
+  
+
+  </div> <!-- cierre page -->
+
+  <script src="script.js"></script>
+</body>
+</html>
