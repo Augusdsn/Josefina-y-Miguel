@@ -22,8 +22,17 @@
         </button>
 
         <p class="hero-hint">Toca el pasaporte para abrir la invitación</p>
+        <p class="hero-hint-people"><b>Esta invitación es valida para 2 personas</b></p>
       </div>
     </section>
+
+    <!-- Mute button -->
+    <button id="muteBtn" class="mute-btn" title="Silenciar música">🔊</button>
+
+    <!-- Hidden audio player for background music -->
+    <audio id="backgroundMusic" preload="auto" loop style="display: none;">
+      <source src="Shed A Light (Audio by Robin Schulz & David Guetta).mp3" type="audio/mpeg">
+    </audio>
 
     <!-- CONTENIDO PRINCIPAL, tipo “landing” (como el template Floral) -->
     <main class="layout" id="layout">
@@ -90,6 +99,7 @@
       <!-- BLOQUE ITINERARIO -->
       <section class="section itinerary-section">
         <div class="card">
+          <p class="recordatorio">Recuerda organizarte con tiempo para que no te pierdas ningún momento de esta ceremonia tan especial para nosotros.</p>
 
           <h2 class="itinerary-title">Itinerario:</h2>
 
@@ -100,13 +110,21 @@
             <div class="itinerary-items">
 
               <div class="it-item">
+                <h3 class="it-title">Ceremonia</h3>
+                <div class="it-icon">
+                  <img src="iglesia.png" alt="Iglesia" />
+                </div>
+                <p class="it-address-name">Iglesia Colegio Verbo Divino</p>
+                <p class="it-address">Av. Chicureo 12.500, Colina</p>
+                <p class="it-time it-right">17:30hrs</p>
+              </div>
+
+              <div class="it-item">
                 <h3 class="it-title">Sí, acepto</h3>
                 <div class="it-icon">
                   <img src="si-acepto.png" alt="Sí, acepto" />
                 </div>
-                <p class="it-address">Iglesia Colegio Verbo Divino</p>
-                <p class="it-address">Av. Chicureo 12.500, Colina</p>
-                <p class="it-time it-left">17:30hrs</p>
+                <p class="it-time it-left">18:00hrs</p>
               </div>
 
               <div class="it-item">
@@ -114,7 +132,7 @@
                 <div class="it-icon">
                   <img src="coctail.png" alt="Cóctel" />
                 </div>
-                <p class="it-address">Casona de la Laguna Sofía Jottar</p>
+                <p class="it-address-name">Casona de la Laguna Sofía Jottar</p>
                 <p class="it-address">Av. Chicureo 13.000, Piedra Roja, Chicureo, Colina</p>
                 <p class="it-time it-right">19:30hrs</p>
               </div>
@@ -124,7 +142,6 @@
                 <div class="it-icon">
                   <img src="comida.png" alt="Comida" />
                 </div>
-                <p class="it-address">Casona de la Laguna Sofía Jottar</p>
                 <p class="it-time it-left">21:00hrs</p>
               </div>
 
@@ -133,7 +150,6 @@
                 <div class="it-icon">
                   <img src="fiesta.png" alt="Fiesta" />
                 </div>
-                <p class="it-address">Casona de la Laguna Sofía Jottar</p>
                 <p class="it-time it-right">23:00hrs</p>
               </div>
 
@@ -141,6 +157,63 @@
           </div>
 
         </div>
+
+<!-- texto solo adultos -->
+        <div class="hero-hint">
+          <p> Esta fecha está pensada solo para adultos, si tienes niños, ¡organizate con antelación!</p>
+        </div>
+
+        <!-- Botón a formulario -->
+
+        <div class="cta-section">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKC48AyOc9PfJfd6u12sqwewjctts1avYB2R3qiYV3mIlqrA/viewform?usp=dialog" target="_blank" class="cta-button">Confirma tu asistencia</a>
+        </div>
+
+<div class="separador">
+  <rectangle width="100%"/>
+</div>
+
+        <div class="card-container">
+  <!-- Dress Code card -->
+  <div class="flip-card">
+    <div class="front">
+      <div class="icon">
+        <img src="dresscode.png" alt="Dresscode">
+      </div>
+      <div class="title-one">Dress Code</div>
+    </div>
+    <div class="back">
+      <div class="title">Dress Code</div>
+      <p class="description">El blanco es para la novia, tú usarás tu mejor look formal ¡Atrévete con los colores!</p>
+    </div>
+  </div>
+
+    <!-- Regalos card -->
+  <div class="flip-card">
+    <div class="front">
+      <div class="icon-two">
+        <img src="regalo.png" alt="Regalos">
+      </div>
+      <div class="title">Regalos</div>
+    </div>
+    <div class="back">
+      <div class="title">¡Gracias!</div>
+      <p class="description">
+        Código de novios Paris: 18498774<br>
+        <br> <a href="https://www.noviosparis.cl/search-couple" target="_blank">¡Click aqui!</a>
+        <br>
+      </p>
+    </div>
+  </div>
+
+        </div>
+
+  <!-- Angelito auto -->
+   <div class="angel">
+    <p> Tenemos descuento por servicio de "angelito": llega en tu auto y un chofer te lleva de regreso
+<b>+56 9 6695 2124</b></p>
+   </div>
+
       </section>
 
       <section class="section bottom-space"></section>
@@ -152,7 +225,6 @@
   
 
   </div> <!-- cierre page -->
-
   <script src="script.js"></script>
 </body>
 </html>

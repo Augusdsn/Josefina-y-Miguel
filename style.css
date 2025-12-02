@@ -16,10 +16,16 @@
   font-weight: 600;
 }
 
+@font-face {
+  font-family: "CascadiaMono";
+  src: url("CascadiaMono-Light.otf") format("opentype");
+  font-weight: 600;
+}
+
 :root {
   --bg: #f2e4d7;
   --bg-card: #f9f4ee;
-  --accent: #c7976b;
+  --accent-color: #d2a985;
   --text-main: #3c2d28;
   --text-soft: #7a6459;
   --border-soft: #ddcabb;
@@ -126,6 +132,47 @@ html {
   color: var(--text-soft);
 }
 
+.hero-hint-people {
+    margin-top: 4px;
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+/* Mute button */
+.mute-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #d2a985;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(210, 169, 133, 0.3);
+}
+
+.mute-btn:hover {
+  background-color: #c1925c;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(210, 169, 133, 0.4);
+}
+
+.mute-btn:active {
+  transform: scale(0.95);
+}
+
+.mute-btn.muted {
+  opacity: 0.6;
+}
+
 /* ocultar hero cuando se abre invitación */
 .page.show-layout .hero {
   display: none;
@@ -174,7 +221,7 @@ html {
   position: relative;
   width: 100%;
   max-width: 520px; /* ya lo tienes */
-  margin: 0 auto 40px; 
+  margin: 30px auto 40px; 
   height: 520px; /* <<< NUEVO: asegura el espacio del pasaporte */
 }
 
@@ -212,7 +259,7 @@ html {
 .intro {
   font-size: 1.15rem;
   line-height: 1.5;
-  margin: 0;
+  margin: 30px 0 0;
   color: var(--text-main);
 }
 
@@ -220,7 +267,7 @@ html {
 .subtitle-open {
   font-size: 1rem;
   color: var(--text-soft);
-  margin-top: -6px;
+  margin-top: 20px;
   margin-bottom: 16px;
   text-align: center;
 }
@@ -255,59 +302,66 @@ html {
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   background: #d2a985;
-  padding: 35px 0;
+  padding: 35px 20px;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 .cd-block {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   text-align: center;
   gap: 12px;
+  flex: 0 1 auto;
 }
 
 .countdown {
   display: flex;
-  gap: 90px;
-  align-items: center;
+  gap: 20px;
+  align-items: flex-end;
   justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .digits-container {
   display: flex;
   align-items: center !important;
   justify-content: center !important;
-  gap: 12px;
+  gap: 10px;
 }
 
 .digit {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 90px;
-  height: 110px;
+  width: 70px;
+  height: 90px;
   background: #2c2c2c;
   border-radius: 10px;
-  margin: 0 8px;
+  margin: 0;
   padding: 0;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 /* Etiquetas arriba de los números */
 .cd-block label {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: white;
   font-weight: 600;
   letter-spacing: 1px;
   text-align: left !important;
   width: 100%;
-  margin-left: 6px;
+  margin: 0;
   display: block;
   order: -1;
-  margin-bottom: 8px;
+  padding-left: 8px;
+  padding-top: 6px;
 }
 
 /* polaroids bajo el contador */
@@ -358,6 +412,13 @@ html {
   margin-bottom: 90px;
 }
 
+.recordatorio {
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
 .it-item * {
   text-align: center;
 }
@@ -404,6 +465,16 @@ html {
   line-height: 1.35;
 }
 
+.it-adress-name {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.35;
+  font-family: cascadiaMono-light;
+}
+
 /* espacio final */
 .bottom-space {
   height: 100px;
@@ -420,6 +491,26 @@ html {
 
   .collage-wrapper {
     max-width: 340px;
+  }
+
+  .countdown {
+    gap: 30px;
+  }
+
+  .digit {
+    width: 100px !important;
+    height: 140px !important;
+    border-radius: 15px;
+  }
+
+  .digit span {
+    font-family: "Aipointe", serif !important;
+    color: #ffffff !important;
+    font-size: 6rem !important;
+  }
+
+  .cd-block label {
+    font-size: 1rem;
   }
 }
 
@@ -438,25 +529,27 @@ html {
   text-align: initial !important;
 }
 
-/* fuerza a .digit a tener tamaño real */
-.digit {
-  width: 90px !important;
-  height: 110px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: #2c2c2c !important;
-  border-radius: 10px;
-  overflow: hidden;
-}
+/* fuerza a .digit a tener tamaño real - MOBILE ONLY */
+@media (max-width: 899px) {
+  .digit {
+    width: 45px !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #2c2c2c !important;
+    border-radius: 6px;
+    overflow: hidden;
+  }
 
-/* fuerza a los números a aparecer */
-.digit span {
-  font-family: "Aipointe", serif !important;
-  color: #ffffff !important;
-  font-size: 5rem !important;
-  line-height: 1 !important;
-  display: block !important;
+  /* fuerza a los números a aparecer */
+  .digit span {
+    font-family: "Aipointe", serif !important;
+    color: #ffffff !important;
+    font-size: 1.4rem !important;
+    line-height: 1 !important;
+    display: block !important;
+  }
 }
 
 /* Scroll bloqueado por defecto */
@@ -594,6 +687,7 @@ body.show-layout,
 html, body, .page {
   position: relative;
   isolation: isolate;
+  overflow-x: visible;
 }
 
 /* TEXTURA POR ENCIMA DE TODA LA PÁGINA */
@@ -609,13 +703,186 @@ body::after {
   z-index: 99999999 !important;
 }
 
-/* === ESCALA GLOBAL PARA MOBILE (proporcional y uniforme) === */
+/* === RESPONSIVE MOBILE DESIGN === */
 @media (max-width: 760px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
 
   .page-scale {
-    transform: scale(0.88);
-    transform-origin: top center;
+    transform: none;
     width: 100%;
+  }
+
+  /* Text scaling */
+  .names, .hero-open .names {
+    font-size: 1.5rem;
+  }
+
+  .hero-names {
+    font-size: 1.5rem;
+  }
+
+  .hero-tag {
+    font-size: 0.9rem;
+  }
+
+  .tag, .hero-open .tag, .intro {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 8px 0 12px;
+  }
+
+  .subtitle-open {
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  /* Collage / Passport scaling */
+  .collage-wrapper {
+    max-width: 85%;
+    margin-top: 110px;
+    margin-bottom: 250px;
+    height: auto;
+  }
+
+  .collage-open {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Date pill */
+  .date-pill {
+    font-size: 1.6rem;
+    padding: 14px 30px;
+    transform: none;
+    margin-bottom: 24px;
+    margin-top: 12px;
+  }
+
+  .esperamos {
+    font-size: 0.9rem;
+    margin: 10px 0 0;
+  }
+
+  /* Countdown bar - full width, clean */
+  .countdown-bar {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 15px 0;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .countdown {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+  }
+
+  .cd-block {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    gap: 4px;
+  }
+
+  .cd-block label {
+    font-size: 0.65rem;
+    margin-top: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .digits-container {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+  }
+
+  .digit {
+    width: 45px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 6px;
+  }
+
+  .digit span {
+    font-size: 1.4rem;
+  }
+
+  /* Polaroids */
+  .polaroids-img {
+    width: 85%;
+    max-width: 100%;
+    margin-top: 14px;
+  }
+
+  .polaroids-wrapper {
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  /* Itinerary */
+  .itinerary-title {
+    font-size: 1.4rem;
+  }
+
+  .itinerary-path {
+    width: 60px;
+    height: auto;
+  }
+
+  .it-item {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .it-title {
+    font-size: 1.1rem;
+  }
+
+  .it-icon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .it-icon img {
+    width: 50vw;
+    max-width: 130px;
+    height: auto;
+  }
+
+  .it-address {
+    font-size: 0.8rem;
+    margin: 4px 0;
+  }
+
+  .it-time {
+    font-size: 0.9rem;
+    position: static;
+    margin-top: 8px;
+    transform: none;
   }
 
   .it-left,
@@ -625,104 +892,215 @@ body::after {
     margin-top: 10px;
   }
 
-  .it-time {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    transform: none;
-    margin-bottom: 12px;
-    text-align: center;
+  .itinerary-wrapper {
+    flex-direction: column;
   }
 
-  body {
-    overflow-x: hidden !important;
+  /* General spacing */
+  .card {
+    padding: 14px 18px;
   }
 
-  /* Ajusta el espacio final para compensar el scale */
+  .section {
+    padding: 14px 12px;
+    margin-bottom: 10px;
+  }
+
   .bottom-space {
-    height: 200px;
+    height: 60px;
+  }
+
+  /* Prevent excessive widths for content, but not for full-width elements */
+  .layout, .section, .card {
+    max-width: 100%;
   }
 }
 
-html, body {
-  max-width: 100%;
-  overflow-x: hidden !important;
+/* --- Flip‑card effect styles --- */
+
+/* container for the two flip cards */
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 2rem;
 }
 
-/* === FIX CONTADOR EN MOBILE === */
+/* wrapper for each card; controls size and clipping */
+.flip-card {
+  position: relative;
+  width: 260px;
+  height: 180px;
+  overflow: hidden;        /* hides anything that slides outside */
+  cursor: pointer;
+}
+
+@media (min-width: 900px) {
+  .flip-card {
+    width: 340px;
+    height: 240px;
+  }
+}
+
+/* front and back faces */
+.flip-card .front,
+.flip-card .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: transform 0.6s ease;
+}
+
+/* initial colour of the top panel (dark) */
+.flip-card .front {
+  background-color: #a3b39c;   /* adjust to match your palette */
+  color: #fff;
+  z-index: 2;                  /* ensure it sits on top */
+}
+
+/* colour of the hidden panel (light) */
+.flip-card .back {
+  background-color: #eeddc5;
+  color: #342e29;
+  transform: translateY(100%); /* start hidden below */
+}
+
+/* on hover (or focus), slide front up and back up */
+.flip-card:hover .front,
+.flip-card:focus-within .front {
+  transform: translateY(-100%);
+}
+
+.flip-card:hover .back,
+.flip-card:focus-within .back {
+  transform: translateY(0);
+}
+
+/* optional styling for icons and text */
+.flip-card {
+  margin-bottom: 10px;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon img {
+  width: 300%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 85px;
+}
+
+.icon-two img {
+  width: 50%;
+  height: auto;
+  object-fit: contain;
+}
+
+.flip-card .title {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.flip-card .title-one {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: -85px;
+}
+
+.flip-card .cta {
+  font-size: 14px;
+}
+
+.flip-card .description {
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+@media (min-width: 900px) {
+  .flip-card .title,
+  .flip-card .title-one {
+    font-size: 22px;
+  }
+
+  .flip-card .description {
+    font-size: 17px;
+  }
+}
+
+.angel {
+  width: 100%;
+  padding: 20px;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* CTA Button Section */
+.cta-section {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 16px 60px;
+  background-color: #d2a985;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(210, 169, 133, 0.3);
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+}
+
+.cta-button:hover {
+  background-color: #c1925c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(210, 169, 133, 0.4);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(210, 169, 133, 0.3);
+}
+
 @media (max-width: 760px) {
-
-  /* Reducimos el espacio entre bloques del contador */
-  .countdown {
-    gap: 30px !important;
-  }
-  .countdown {
-    width: 100% !important;
-    justify-content: space-between !important;
-    padding: 0 20px !important;
-    box-sizing: border-box !important;
-}
-.cd-block {
-    flex: 1 1 0 !important;
-    align-items: center !important;
-}
-
-  /* Reducimos tamaño de cada tarjetita */
-  .digit {
-    width: 60px !important;
-    height: 80px !important;
-  }
-
-  .digit {
-    flex-shrink: 1 !important;
-}
-
-  /* Reducimos tamaño de los números */
-  .digit span {
-    font-size: 3.2rem !important;
-  }
-
-  /* Reducimos espacio entre los dos dígitos de cada grupo */
-  .digits-container {
-    gap: 6px !important;
-  }
-
-  /* Ajustamos las etiquetas (MESES / DÍAS / HORAS) */
-  .cd-block label {
-    font-size: 1rem !important;
-    margin-left: 2px !important;
-  }
-
-  /* Ajuste para que el strip no se desborde */
-  .countdown-bar {
-    padding: 25px 0 !important;
-    overflow: hidden !important;
+  .cta-button {
+    padding: 14px 50px;
+    font-size: 16px;
   }
 }
 
-/* === FIX DEFINITIVO: que la barra del contador llegue al borde real === */
-
-@media (max-width: 760px) {
-
-  .countdown-bar {
-    width: 100%;
-    margin: 0;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    box-sizing: border-box;
-  }
-  .countdown-bar {
-    overflow: hidden !important;
-}
-
-  /* Asegurar que nada interno genere overflow */
-  .countdown {
-    width: 100%;
-    justify-content: space-around !important;
-  }
-
-  body, html {
-    overflow-x: hidden !important;
-  }
+.separador {
+  width: 600px;
+  height: 3px;
+  background-color: #c1925c;
+  margin: 120px auto;
+  border-radius: 2px;
 }

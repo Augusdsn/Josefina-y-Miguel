@@ -2,13 +2,17 @@
 
 const page = document.querySelector(".page");
 const openInviteBtn = document.getElementById("openInvite");
+const muteBtn = document.getElementById("muteBtn");
+const backgroundMusic = document.getElementById("backgroundMusic");
+
+let isPlaying = false;
 
 if (openInviteBtn) {
 openInviteBtn.addEventListener("click", () => {
-  // 1) Fade‑out cinematográfico del hero
+  // 1) Fade-out cinematografico del hero
   page.classList.add("fade-out-hero");
 
-  // Fade‑out del pasaporte cerrado
+  // Fade-out del pasaporte cerrado
   const passportClosed = document.querySelector(".hero-passport-img");
   passportClosed.classList.add("fade-out");
 
@@ -16,19 +20,56 @@ openInviteBtn.addEventListener("click", () => {
     passportClosed.style.display = "none";
   }, { once: true });
 
-  // 2) Mostrar layout con fade‑in suave
+  // 2) Mostrar layout con fade-in suave
   setTimeout(() => {
     page.classList.add("show-layout");
     document.body.classList.add("show-layout");
     window.scrollTo({ top: 0, behavior: "smooth" });
+    
+    // 3) Start playing music when entering hero-open
+    if (backgroundMusic && !isPlaying) {
+      backgroundMusic.volume = 0.7; // Set volume to 70%
+      const playPromise = backgroundMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log("Music started playing");
+          isPlaying = true;
+        }).catch(err => {
+          console.log("Autoplay was prevented:", err);
+          // Try playing on user interaction
+        });
+      }
+    }
   }, 1000);
 
-  // 3) Activar animación del pasaporte abierto (fade‑in + saltito)
+  // 4) Activar animacion del pasaporte abierto (fade-in + saltito)
   setTimeout(() => {
     const passportOpen = document.querySelector(".collage-open");
     passportOpen.classList.add("show");
   }, 1200);
 })
+}
+
+/* Music mute button */
+if (muteBtn) {
+  muteBtn.addEventListener("click", () => {
+    if (backgroundMusic) {
+      if (backgroundMusic.paused) {
+        // Play the music
+        backgroundMusic.volume = 0.7; // Keep volume at 70%
+        backgroundMusic.play().catch(err => {
+          console.log("Play error:", err);
+        });
+        muteBtn.textContent = "🔊";
+        muteBtn.classList.remove("muted");
+      } else {
+        // Pause the music
+        backgroundMusic.pause();
+        muteBtn.textContent = "🔇";
+        muteBtn.classList.add("muted");
+      }
+    }
+  });
 }
 
 /* COUNTDOWN */
